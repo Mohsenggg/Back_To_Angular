@@ -1,0 +1,41 @@
+<p>master works!</p>
+
+
+<div class="row">
+<div class="col-4 text-center">
+
+<div class="btn-group center" role="group" aria-label="Basic example">
+
+  <button type="button" class="btn" [ngClass]="currentTab == 'Roles'?'btn-success':'btn-secondary'" (click)="showPage('Roles')">
+    Roles
+  </button>
+
+  <button type="button" class="btn" [ngClass]="currentTab == 'Choices'?'btn-success':'btn-secondary'" (click)="showPage('Choices')">
+    Choices
+  </button>
+
+  <button type="button" class="btn" [ngClass]="currentTab == 'Position'?'btn-success':'btn-secondary'" (click)="showPage('Position')">
+    Position
+  </button>
+
+</div>
+
+</div>
+</div>
+
+
+<div class="row">
+
+  <div class="col-12" *ngIf="currentTab == 'Roles'">
+    <app-roles></app-roles>
+  </div>
+
+  <div class="col-12" *ngIf="currentTab == 'Choices'">
+    <app-choices></app-choices>
+  </div>
+
+  <div class="col-12" *ngIf="currentTab == 'Position'">
+    <app-position></app-position>
+  </div>
+
+</div>

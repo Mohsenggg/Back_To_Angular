@@ -1,0 +1,80 @@
+<p>roles works!</p>
+
+<!-- // Data Interpolation -->
+<p>{{ firstName }}</p>
+<p>{{ age }}</p>
+<p>{{ man }}</p>
+<p>{{ date }}</p>
+
+<!-- // Property Binding -->
+
+<div class="row">
+  <div class="col-3">
+    <input type="text" [value]="firstName" class="form-control" />
+  </div>
+  <div class="col-3">
+    <input [type]="inputType" />
+  </div>
+</div>
+
+
+<p></p>
+
+<!-- // Two way binding  -->
+<div>
+    <div class="row">
+        <p>{{ lastName }}</p>
+
+        <div class="col-3">
+          <input type="text" [value]="lastName" class="form-control" />
+        </div>
+
+        <div class="col-3">
+          <input type="text" [(ngModel)]="lastName " class="form-control" />
+        </div>
+    </div>
+    <p></p>
+
+    <p></p>
+    <div class="row">
+          <div class="col-3">
+            <Select>
+              <option value="Mohsen">Member 1</option>
+              <option value="Asem">Member 2</option>
+              <option value="Adel">Member 3</option>
+            </Select>
+          </div>
+
+          <div class="col-3">
+            <select [(ngModel)]="selectedState">
+              <option value="Mohsen">Member 1</option>
+              <option value="Asem">Member 2</option>
+              <option value="Adel">Member 3</option>
+            </select>
+          </div>
+
+      </div>
+
+      <p></p>
+      <div class="row">
+        <p>Here is : {{lastName}}</p>
+        <div>
+          {{selectedState}}
+        </div>
+      </div>
+      <p></p>
+
+
+      <p></p>
+      <div class="row">
+        <div class="col-3" >
+        <button class="btn btn-dark" (click)="showAlert()"> Alert </button>
+        </div>
+
+
+        <div class="col-3" >
+          <button class="btn btn-danger" (click)="showMessageAlert('Sondos')"> Alert With Name </button>
+          </div>
+      </div>
+      <p></p>
+</div>

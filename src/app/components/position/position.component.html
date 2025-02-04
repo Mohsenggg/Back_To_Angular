@@ -1,0 +1,59 @@
+<p>position works!</p>
+
+<div class="row">
+
+  <div class="col-10">
+    <ul>
+      <li *ngFor="let item of positionList"> {{item.role }}</li>
+    </ul>
+  </div>
+
+  <div class="col-10">
+    <select>
+      <option *ngFor="let role of positionList" [value]="role.roleId">
+
+        {{role.role}}
+
+      </option>
+    </select>
+
+  </div>
+
+</div>
+
+<p></p>
+<p></p>
+
+<div class="row">
+  <div class="col-10">
+    <button class="btn btn-close-white mx-2" *ngFor="let item of positionList" > {{item.role}} </button>
+  </div>
+</div>
+
+
+<p></p>
+<p></p>
+
+<div class="row">
+  <div class="col-12">
+    <table  class=" table table-active">
+      <thead>
+        <tr>
+          <th> Serial Number </th>
+          <th> Role Id</th>
+          <th> Role Name</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let item of positionList; let serNo = index">
+          <td> {{ serNo + 1 }}</td>
+          <td> {{item.roleId}} </td>
+          <td> {{item.role}} </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+</div>
