@@ -12,11 +12,15 @@ import { PositionComponent } from "../position/position.component";
   styleUrl: './master.component.css'
 })
 export class MasterComponent {
+
+
   currentTab : string = "";
 
 
-  showPage(message : string){
-    this.currentTab = message;
+
+
+  showPage(page : string){
+    this.currentTab = page;
   }
 
 }

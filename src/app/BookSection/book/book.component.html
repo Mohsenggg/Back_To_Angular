@@ -1,0 +1,177 @@
+
+<!-- ============================================================ -->
+
+<button
+  type="button"
+  class="m-2 btn btn-lg"
+  [ngClass]="
+    displaySection == 'bookListSection'
+      ? 'btn-primary'
+      : 'btn-outline-primary'
+  "
+  (click)="showSection('bookListSection')"
+>
+  Books
+</button>
+
+<button
+  type="button"
+  class="m-2 btn btn-lg"
+  [ngClass]="
+    displaySection == 'addBookSection'
+      ? 'btn-success'
+      : 'btn-outline-success'
+  "
+  (click)="showSection('addBookSection')"
+>
+  + Add
+</button>
+
+<!-- ============================================================= -->
+
+<div class="row pt-4" *ngIf="displaySection === 'bookListSection'">
+  <!-- Display || Show Book List  -->
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header bg-primary">Book List</div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12">
+            <table class="table table-active">
+              <thead>
+                <tr>
+                  <th>Book Name</th>
+                  <th>Book Price</th>
+                  <th>Book Size</th>
+                  <th>Book Category</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let item of bookList">
+                  <td>{{item.bookName}}</td>
+                  <td>{{item.price}}</td>
+                  <td>{{item.size}}</td>
+                  <td>{{item.catigory}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row pt-4" *ngIf="displaySection === 'addBookSection'">
+  <!-- Display || Add Book Form -->
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header bg-success">New Book</div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-6">
+            <label for="" class="">Book Name</label>
+            <p></p>
+            <input
+              type="text"
+              [(ngModel)]="bookData.bookName"
+              class="form-control"
+            />
+          </div>
+
+          <div class="col-6 pt-2">
+            <label for="" class="">Category</label>
+            <p></p>
+            <input
+              type="text"
+              [(ngModel)]="bookData.catigory"
+              class="form-control"
+            />
+          </div>
+
+          <div class="col-6 pt-2">
+            <label for="" class="">Price</label>
+            <p></p>
+            <input
+              type="text"
+              [(ngModel)]="bookData.price"
+              class="form-control"
+            />
+          </div>
+
+          <div class="col-6 pt-2">
+            <label for="" class="">Size</label>
+            <p></p>
+            <input
+              type="text"
+              [(ngModel)]="bookData.size"
+              class="form-control"
+            />
+          </div>
+
+          <div class="col-12 pt-2">
+            <label for="" class="">Description</label>
+            <p></p>
+            <textarea [(ngModel)]="bookData.description" class="form-control">
+            </textarea>
+          </div>
+
+          <div class="row pt-4">
+            <div class="col-2 text-end">
+              <!-- <button class="btn btn-success" (click)="onSaveBook()">Save Book</button> -->
+              <button
+                class="btn btn-lg btn-outline-success"
+              >
+                Save Book
+              </button>
+            </div>
+
+            <div class="col-2 text-left">
+              <button
+                class="btn btn-lg btn-outline-secondary"
+              >
+                Reset
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- progress Bar -->
+        <div class="position-relative m-4">
+          <div class="progress" style="height: 1px">
+            <div
+              class="progress-bar bg-success"
+              role="progressbar"
+              style="width: 50%"
+              aria-valuenow="50"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            ></div>
+          </div>
+          <button
+            type="button"
+            class="position-absolute top-0 start-0 translate-middle btn btn-sm btn-success rounded-pill"
+            style="width: 2rem; height: 2rem"
+          >
+            1
+          </button>
+          <button
+            type="button"
+            class="position-absolute top-0 start-50 translate-middle btn btn-sm btn-success rounded-pill"
+            style="width: 2rem; height: 2rem"
+          >
+            2
+          </button>
+          <button
+            type="button"
+            class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-secondary rounded-pill"
+            style="width: 2rem; height: 2rem"
+          >
+            3
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

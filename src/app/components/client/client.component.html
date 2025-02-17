@@ -1,0 +1,114 @@
+<p>client works!</p>
+
+<div class="row">
+  <!-- First Card -->
+  <div class="col-6">
+    <div class="card">
+      <div class="card-header bg-danger">Card List</div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12">
+            <table class="table table-active">
+              <thead>
+                <tr>
+                  <th>Serial Number</th>
+                  <th>Person Name</th>
+                  <th>Company Name</th>
+                  <th>Contact Number</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Second Card -->
+  <div class="col-6">
+    <div class="card">
+      <div class="card-header bg-success">New Client</div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-6">
+            <label for="" class="" >Person Name</label>
+            <p></p>
+            <input type="text" [(ngModel)]="clientData.contactPersonName" class="form-control" />
+          </div>
+
+          <div class="col-6 pt-2">
+            <label for="" class="" >Company Name</label>
+            <p></p>
+            <input type="text" [(ngModel)]="clientData.companyName" class="form-control" />
+          </div>
+
+          <div class="col-6 pt-2">
+            <label for="" class="" >Address</label>
+            <p></p>
+            <textarea [(ngModel)]="clientData.address" class="form-control"></textarea>
+          </div>
+
+          <div class="col-6 pt-2">
+            <label for="" class="" >City</label>
+            <p></p>
+            <input type="text" [(ngModel)]="clientData.city" class="form-control" />
+          </div>
+
+          <div class="col-6 pt-2">
+            <label for="" class="" >Pin Code</label>
+            <p></p>
+            <input type="text" [(ngModel)]="clientData.pincode" class="form-control" />
+          </div>
+
+          <div class="col-6 pt-2">
+            <label for="" class="" >State</label>
+            <p></p>
+            <input type="text" [(ngModel)]="clientData.state" class="form-control" />
+          </div>
+
+          <div class="col-6 pt-2">
+            <label for="" class="" >Employee Strength</label>
+            <p></p>
+            <input type="text" [(ngModel)]="clientData.employeeStrength" class="form-control" />
+          </div>
+
+          <div class="col-6 pt-2">
+            <label for="" class="" >Gst Number</label>
+            <p></p>
+            <input type="text" [(ngModel)]="clientData.gstNo" class="form-control" />
+          </div>
+
+          <div class="col-6 pt-2">
+            <label for="" class="" >Contact Number</label>
+            <p></p>
+            <input type="text" [(ngModel)]="clientData.contactNo" class="form-control pt-2" />
+          </div>
+
+          <div class="col-6 pt-2">
+            <label for="" class="">Registration No</label>
+            <p></p>
+            <input type="text" [(ngModel)]="clientData.regNo" class="form-control" />
+          </div>
+        </div>
+        <div class="row pt-4 pt-2">
+          <div class="col-6 text-center">
+            <button class="btn btn-success" (click)="onSaveClient()">Save</button>
+          </div>
+
+          <div class="col-6 text-center pt-2">
+            <button class="btn btn-danger">Reset</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

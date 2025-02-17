@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit } from '@angular/core';
-import { IPosition } from '../../model/interface/IPosition';
+import { ApiResponseModel, IPosition } from '../../model/interface/IPosition';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { environment } from '../../../environments/environment.development';
 
 @Component({
   selector: 'app-position',
@@ -28,11 +29,10 @@ http = inject(HttpClient)
     this.gelAllPositions()
   }
 
+
   gelAllPositions(){
-    // this.http.get("https://freeapi.miniprojectideas.com/api/ClientStrive/GetAllRoles").subscribe((res:any)=>{
 
-
-      this.http.get("https://f14b1d95-7e79-40f5-b1f5-9465d32e041e.mock.pstmn.io/NetCont/Nokia/2G").subscribe((res:any)=>{
+      this.http.get<ApiResponseModel>(environment.API_URL +  "GetRoles").subscribe((res:ApiResponseModel)=>{
 
       this.positionList = res.data })
   }

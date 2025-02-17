@@ -1,1 +1,26 @@
-<p>choices works!</p>
+  @if (isLoaded) {
+      <div class="spinner-border text-muted"></div>
+      <div class="spinner-border text-primary"></div>
+      <div class="spinner-border text-success"></div>
+      <div class="spinner-border text-info"></div>
+      <div class="spinner-border text-warning"></div>
+      <div class="spinner-border text-danger"></div>
+      <div class="spinner-border text-secondary"></div>
+      <div class="spinner-border text-dark"></div>
+      <div class="spinner-border text-light"></div>
+  } @else {
+      <div class="row">
+        @for (item of choicesList; track $index) {
+        <div class="col-4">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">{{ item.designation }}</h4>
+              <p class="card-text">Some example text. Some example text.</p>
+              <a href="#" class="card-link">Card link</a>
+              <a href="#" class="card-link">Another link</a>
+            </div>
+          </div>
+        </div>
+        }
+      </div>
+  }
