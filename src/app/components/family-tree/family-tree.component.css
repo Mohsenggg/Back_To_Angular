@@ -1,25 +1,32 @@
 .tree-container {
   position: relative;
   width: 100%;
-  height: 500px;
-  border: 1px solid #ddd;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .member-card {
   position: absolute;
   width: 120px;
-  padding: 10px;
+  height: 50px;
   background: lightblue;
-  border: 1px solid black;
+  border: 2px solid black;
   text-align: center;
+  line-height: 50px;
+  cursor: grab;
+  user-select: none;
   border-radius: 8px;
+}
+
+.member-card:active {
+  cursor: grabbing;
 }
 
 .tree-svg {
   position: absolute;
-  width: 100%;
-  height: 500px;
   top: 0;
   left: 0;
-  pointer-events: none; /* Prevents SVG from blocking clicks */
+  width: 100%;
+  height: 100vh;
+  pointer-events: none;
 }

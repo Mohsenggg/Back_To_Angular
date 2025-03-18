@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
 import { FamilyMember } from '../../model/interface/FamilyMember';
 import { CommonModule } from '@angular/common';
 
@@ -11,37 +11,50 @@ import { CommonModule } from '@angular/common';
 })
 export class FamilyTreeComponent implements OnInit {
 
-
   familyTree: FamilyMember[] = [];
+  draggingMember: FamilyMember | null = null;
+  offsetX = 0;
+  offsetY = 0;
+
+  constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.familyTree = [
       { id: 1, name: 'Grandparent', children: [], x: 300, y: 50 }
     ];
-    console.log('Initialized Family Tree:', this.familyTree);
   }
-
-  constructor(private cdr: ChangeDetectorRef) {}
 
   addChild(parent: FamilyMember) {
     const newChild: FamilyMember = {
       id: Date.now(),
       name: `Child of ${parent.name}`,
       children: [],
-      x: parent.x + (parent.children.length * 150) - 75, // Dynamic horizontal positioning
+      x: parent.x + (parent.children.length * 150) - 75, // Dynamic positioning
       y: parent.y + 100 // Move down vertically
     };
 
     parent.children.push(newChild);
+    this.cdr.detectChanges(); // Force update
+  }
 
-    this.familyTree = JSON.parse(JSON.stringify(this.familyTree)); // Deep copy trick
-    this.cdr.detectChanges(); // Force UI update
+  startDrag(event: MouseEvent, member: FamilyMember) {
+    this.draggingMember = member;
+    this.offsetX = event.clientX - member.x;
+    this.offsetY = event.clientY - member.y;
+  }
 
-    console.log('Added Child:', newChild);
-    console.log('Updated Family Tree:', this.familyTree);
+  @HostListener('document:mousemove', ['$event'])
+  onMouseMove(event: MouseEvent) {
+    if (this.draggingMember) {
+      this.draggingMember.x = event.clientX - this.offsetX;
+      this.draggingMember.y = event.clientY - this.offsetY;
+      this.cdr.detectChanges(); // Force UI update
+    }
+  }
 
-    // this.cdr.detectChanges(); // ✅ Force Angular to update UI
-
+  @HostListener('document:mouseup')
+  stopDrag() {
+    this.draggingMember = null;
   }
 
 
