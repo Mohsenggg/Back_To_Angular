@@ -1,29 +1,14 @@
-
 <!-- ============================================================ -->
 
-<button
-  type="button"
-  class="m-2 btn btn-lg"
-  [ngClass]="
-    displaySection == 'bookListSection'
-      ? 'btn-primary'
-      : 'btn-outline-primary'
-  "
-  (click)="showSection('bookListSection')"
->
+<button type="button" class="m-2 btn btn-lg" [ngClass]="
+    displaySection == 'bookListSection' ? 'btn-primary' : 'btn-outline-primary'
+  " (click)="showSection('bookListSection')">
   Books
 </button>
 
-<button
-  type="button"
-  class="m-2 btn btn-lg"
-  [ngClass]="
-    displaySection == 'addBookSection'
-      ? 'btn-success'
-      : 'btn-outline-success'
-  "
-  (click)="showSection('addBookSection')"
->
+<button type="button" class="m-2 btn btn-lg" [ngClass]="
+    displaySection == 'addBookSection' ? 'btn-success' : 'btn-outline-success'
+  " (click)="showSection('addBookSection')">
   + Add
 </button>
 
@@ -40,19 +25,33 @@
             <table class="table table-active">
               <thead>
                 <tr>
+                  <th>Book Id</th>
                   <th>Book Name</th>
                   <th>Book Price</th>
                   <th>Book Size</th>
                   <th>Book Category</th>
+                  <th>Edit Book</th>
+                  <th>Delete Book</th>
                 </tr>
               </thead>
 
               <tbody>
                 <tr *ngFor="let item of bookList">
-                  <td>{{item.bookName}}</td>
-                  <td>{{item.price}}</td>
-                  <td>{{item.size}}</td>
-                  <td>{{item.catigory}}</td>
+                  <td>{{ item.bookId }}</td>
+                  <td>{{ item.bookName }}</td>
+                  <td>{{ item.price }}</td>
+                  <td>{{ item.size }}</td>
+                  <td>{{ item.category }}</td>
+                  <td>
+                    <button class="btn btn-secondary" (click)="onEditBook(item)">
+                      Edit
+                    </button>
+                  </td>
+                  <td>
+                    <button class="btn btn-danger" (click)="onDeleteBookById(item.bookId)">
+                      Delete
+                    </button>
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -63,114 +62,98 @@
   </div>
 </div>
 
+<!-- ============================================================= -->
+<!-- Display || Add Book Form -->
+
 <div class="row pt-4" *ngIf="displaySection === 'addBookSection'">
-  <!-- Display || Add Book Form -->
   <div class="col-12">
     <div class="card">
       <div class="card-header bg-success">New Book</div>
+
+      <!-- Add form tag to be able to disable save button -->
+      <!-- <form action=""> -->
       <div class="card-body">
-        <div class="row">
-          <div class="col-6">
-            <label for="" class="">Book Name</label>
-            <p></p>
-            <input
-              type="text"
-              [(ngModel)]="bookData.bookName"
-              class="form-control"
-            />
-          </div>
-
-          <div class="col-6 pt-2">
-            <label for="" class="">Category</label>
-            <p></p>
-            <input
-              type="text"
-              [(ngModel)]="bookData.catigory"
-              class="form-control"
-            />
-          </div>
-
-          <div class="col-6 pt-2">
-            <label for="" class="">Price</label>
-            <p></p>
-            <input
-              type="text"
-              [(ngModel)]="bookData.price"
-              class="form-control"
-            />
-          </div>
-
-          <div class="col-6 pt-2">
-            <label for="" class="">Size</label>
-            <p></p>
-            <input
-              type="text"
-              [(ngModel)]="bookData.size"
-              class="form-control"
-            />
-          </div>
-
-          <div class="col-12 pt-2">
-            <label for="" class="">Description</label>
-            <p></p>
-            <textarea [(ngModel)]="bookData.description" class="form-control">
-            </textarea>
-          </div>
-
-          <div class="row pt-4">
-            <div class="col-2 text-end">
-              <!-- <button class="btn btn-success" (click)="onSaveBook()">Save Book</button> -->
-              <button
-                class="btn btn-lg btn-outline-success"
-              >
-                Save Book
-              </button>
+        <form action="" #form="ngForm">
+          <div class="row">
+            <div class="col-6">
+              <label for="" class="">Book Name</label>
+              <p></p>
+              <input type="text" #bookName="ngModel" required minlength="5" pattern="^[0-9]+$"
+              [(ngModel)]="bookData.bookName" name="bookName"  class="form-control"/>
+              @if (bookName.touched) {
+              <div class="text-danger">
+                @if (bookName.errors?.['required']) {
+                <span>This Is Required</span>}
+                @if (bookName.errors?.['minlength']) {
+                <span>Min Length is 5 </span>}
+                @if (bookName.errors?.['pattern']) {
+                <span>The input should be number </span>}
+              </div>
+              }
             </div>
 
-            <div class="col-2 text-left">
-              <button
-                class="btn btn-lg btn-outline-secondary"
-              >
-                Reset
-              </button>
+            <div class="col-6 pt-2">
+              <label for="" class="">Category</label>
+              <p></p>
+              <input type="text" #category="ngModel" [(ngModel)]="bookData.category" name="category"  class="form-control"/>
+            </div>
+
+            <div class="col-6 pt-2">
+              <label for="" class="">Price</label>
+              <p></p>
+              <input type="text" #price="ngModel" [(ngModel)]="bookData.price" name="price"  class="form-control"/>
+            </div>
+
+            <div class="col-6 pt-2">
+              <label for="" class="">Size</label>
+              <p></p>
+              <input type="text" #size="ngModel" [(ngModel)]="bookData.size" name="size"  class="form-control"/>
+            </div>
+
+            <div class="col-12 pt-2">
+              <label for="" class="">Description</label>
+              <p></p>
+              <textarea #description="ngModel" [(ngModel)]="bookData.description" name="description" class="form-control"></textarea>
+            </div>
+
+            <div class="row pt-4">
+              <div class="col-2 text-end">
+                <!-- <button class="btn btn-success" (click)="onSaveBook()">Save Book</button> -->
+                <button class="btn btn-lg btn-outline-success"  [disabled]="!form.valid" (click)="saveBookOnClick()">
+                  <!-- GOOD BINDING HERE -->
+                  {{ bookData.bookId != 0 ? "Update" : "Save" }}
+                </button>
+              </div>
+
+              <div class="col-2 text-left">
+                <button class="btn btn-lg btn-outline-secondary">Reset</button>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- progress Bar -->
-        <div class="position-relative m-4">
-          <div class="progress" style="height: 1px">
-            <div
-              class="progress-bar bg-success"
-              role="progressbar"
-              style="width: 50%"
-              aria-valuenow="50"
-              aria-valuemin="0"
-              aria-valuemax="100"
-            ></div>
+          <!-- progress Bar -->
+          <div class="position-relative m-4">
+            <div class="progress" style="height: 1px">
+              <div class="progress-bar bg-success" role="progressbar" style="width: 50%" aria-valuenow="50"
+                aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <button type="button"
+              class="position-absolute top-0 start-0 translate-middle btn btn-sm btn-success rounded-pill"
+              style="width: 2rem; height: 2rem">
+              1
+            </button>
+            <button type="button"
+              class="position-absolute top-0 start-50 translate-middle btn btn-sm btn-success rounded-pill"
+              style="width: 2rem; height: 2rem">
+              2
+            </button>
+            <button type="button"
+              class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-secondary rounded-pill"
+              style="width: 2rem; height: 2rem">
+              3
+            </button>
           </div>
-          <button
-            type="button"
-            class="position-absolute top-0 start-0 translate-middle btn btn-sm btn-success rounded-pill"
-            style="width: 2rem; height: 2rem"
-          >
-            1
-          </button>
-          <button
-            type="button"
-            class="position-absolute top-0 start-50 translate-middle btn btn-sm btn-success rounded-pill"
-            style="width: 2rem; height: 2rem"
-          >
-            2
-          </button>
-          <button
-            type="button"
-            class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-secondary rounded-pill"
-            style="width: 2rem; height: 2rem"
-          >
-            3
-          </button>
-        </div>
+        </form>
       </div>
     </div>
   </div>

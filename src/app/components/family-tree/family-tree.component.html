@@ -1,0 +1,43 @@
+  <p>family-tree works!</p>
+  <p>Hiiiii</p>
+
+
+  <div class="tree-container">
+    <!-- Render the root members -->
+    <ng-container *ngFor="let member of familyTree">
+      <ng-container *ngTemplateOutlet="renderMember; context: { $implicit: member }"></ng-container>
+    </ng-container>
+  </div>
+
+  <!-- Template for family member card -->
+  <ng-template #renderMember let-member>
+    <div class="member-card"
+         [style.left.px]="member.x"
+         [style.top.px]="member.y">
+      <p>{{ member.name }}</p>
+      <button (click)="addChild(member)">➕ Add Child</button>
+    </div>
+
+    <!-- Draw lines to children -->
+    <svg class="tree-svg">
+      <ng-container *ngFor="let parent of familyTree">
+        <ng-container *ngFor="let child of parent.children">
+          <line
+            [attr.x1]="parent.x + 50"
+            [attr.y1]="parent.y + 50"
+            [attr.x2]="child.x + 50"
+            [attr.y2]="child.y"
+            stroke="black" stroke-width="2"
+          />
+          <!-- Debugging Log -->
+          <p>Line from {{ parent.name }} to {{ child.name }}</p>
+        </ng-container>
+      </ng-container>
+    </svg>
+
+    <!-- Recursively render children -->
+    <ng-container *ngFor="let child of member.children">
+      <ng-container *ngTemplateOutlet="renderMember; context: { $implicit: child }"></ng-container>
+    </ng-container>
+  </ng-template>
+

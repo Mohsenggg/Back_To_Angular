@@ -5,7 +5,7 @@ export class Book{
 
   bookName: String ;
 
-  catigory: String ;
+  category: String ;
 
 
   price: String ;
@@ -17,7 +17,7 @@ export class Book{
   constructor(){
     this.bookId = 0;
     this.bookName = '';
-    this.catigory = '';
+    this.category = '';
     this.price = '';
     this.description ='';
     this.size = 0;
