@@ -1,0 +1,66 @@
+<p>remember works!</p>
+
+<div class="div">
+     <div class="col-4 text-center">
+
+          <div class="btn-group center" role="group" aria-label="Basic example">
+
+
+               <button type="button" class="btn" [ngClass]="preview == 'Roles'?'btn-success':'btn-secondary'"
+                    (click)="setPreview('Roles')">
+                    Roles
+               </button>
+
+
+
+               <button type="button" class="btn" [ngClass]="preview == 'Book'?'btn-success':'btn-secondary'"
+                    (click)="setPreview('Book')">
+                    Book
+               </button>
+
+
+               <button type="button" class="btn" [ngClass]="preview == 'Remember'?'btn-success':'btn-secondary'"
+                    (click)="setPreview('Remember')">
+                    Remember
+               </button>
+
+          </div>
+
+     </div>
+
+</div>
+
+
+
+<!-- ---------------------------------------- -->
+
+<div class="row pt-2">
+
+
+     <div class="col-12" *ngIf="preview == 'Roles'">
+          <app-roles></app-roles>
+     </div>
+
+
+     <div class="col-12" *ngIf="preview == 'Book'">
+          <app-book></app-book>
+     </div>
+
+
+     <div class="col-12" *ngIf="preview == 'Master'">
+          <app-master></app-master>
+     </div>
+
+
+</div>
+
+<!-- --------------------------------- -->
+
+<p> one way binding using interpolation return: {{description}} </p>
+
+<p> one way binding using property binding return >> </p>
+<input [value]="description">
+
+<p> ================================================== </p>
+<p> Two way binding using NgModule change the first name from "Good User" to {{firstName}} >> </p>
+<input type="text" [(ngModel)]="firstName" id="">

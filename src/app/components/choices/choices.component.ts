@@ -21,6 +21,7 @@ export class ChoicesComponent implements OnInit{
 
 
 
+  // what is this
   masterService = inject(MasterServiceService)
 
 

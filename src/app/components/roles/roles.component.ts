@@ -9,9 +9,12 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './roles.component.css'
 })
 export class RolesComponent implements OnInit {
+
   ngOnInit(): void {
+
     alert("Good Morning")
     throw new   Error('Method not implemented.');
+
   }
 
 
@@ -37,9 +40,9 @@ selectedState: string = "AA";
 showAlert(){
   alert("Welcome to your first time with event binding")
 }
+
 showMessageAlert(message:string){
   alert("Welcome ya "+ message +" to your first time with event binding")
-
 }
 
 }

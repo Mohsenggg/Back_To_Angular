@@ -1,38 +1,99 @@
-  <p>family-tree works!</p>
-  <p>Hiiiii</p>
+<p>family-tree works!</p>
+<p>Hiiiii</p>
 
 
-  <div class="tree-container">
-    <!-- Render the root members -->
-    <ng-container *ngFor="let member of familyTree">
-      <ng-container *ngTemplateOutlet="renderMember; context: { $implicit: member }"></ng-container>
-    </ng-container>
-  </div>
+<div class="tree-container">
+       <!-- Render the root members -->
+       <ng-container *ngFor="let member of familyTree">
 
-  <!-- Template for family member card -->
-  <ng-template #renderMember let-member>
-    <div class="member-card"
-         [style.left.px]="member.x"
-         [style.top.px]="member.y"
-         (mousedown)="startDrag($event, member)">
-      <p>{{ member.name }}</p>
-      <button (click)="addChild(member)">➕ Add Child</button>
-    </div>
+              <ng-container *ngTemplateOutlet="renderMember;
+              context: { $implicit: member }"></ng-container>
 
-    <!-- Draw connection lines -->
-    <svg class="tree-svg">
-      <line
-        *ngFor="let child of member.children"
-        [attr.x1]="member.x + 50"
-        [attr.y1]="member.y + 50"
-        [attr.x2]="child.x + 50"
-        [attr.y2]="child.y"
-        stroke="black" stroke-width="2"
-      />
-    </svg>
+       </ng-container>
+</div>
 
-    <!-- Recursively render children -->
-    <ng-container *ngFor="let child of member.children">
-      <ng-container *ngTemplateOutlet="renderMember; context: { $implicit: child }"></ng-container>
-    </ng-container>
-  </ng-template>
+
+
+<!-- Template for family member card -->
+<ng-template #renderMember let-member>
+
+       <div
+              class="member-card"
+              [attr.data-id]="member.id"
+              [style.left.px]="member.x"
+              [style.top.px]="member.y"
+              (mousedown)="startDrag($event, member)"
+              [class.selected]="selectedMember?.id === member.id"
+       >
+              <p>{{ member.name }}</p>
+       </div>
+       <!-- EDIT PANEL -->
+       <div
+              class="edit-panel"
+              *ngIf="selectedMember?.id === member.id"
+              [style.left.px]="member.x + 120"
+              [style.top.px]="member.y"
+       >
+              <h4>Edit Member</h4>
+              <label>
+                     Name:
+                     <input [(ngModel)]="newName" />
+                     <button (click)="updateName()">Update Name</button>
+
+              </label>
+
+              <div style="margin-top: 5px">
+                     <label>
+                            Add Child:
+                            <input [(ngModel)]="childName" />
+                            <button (click)="addNewChild()">Add Child</button>
+                     </label>
+              </div>
+
+              <div *ngIf="selectedMember.children.length > 0">
+                     <h5>Children:</h5>
+                     <ul>
+                            <li *ngFor="let c of selectedMember.children">{{ c.name }}</li>
+                     </ul>
+              </div>
+       </div>
+       <!-- CONNECTION LINES -->
+       <svg class="tree-svg">
+              <line
+                     *ngFor="let child of member.children"
+                     [attr.x1]="member.x + 50"
+                     [attr.y1]="member.y + 50"
+                     [attr.x2]="child.x + 50"
+                     [attr.y2]="child.y"
+                     stroke="black"
+                     stroke-width="2"
+              />
+       </svg>
+       <!-- RENDER CHILDREN RECURSIVELY -->
+       <ng-container *ngFor="let child of member.children">
+              <ng-container
+                     *ngTemplateOutlet="renderMember; context: { $implicit: child }"
+              >
+              </ng-container>
+       </ng-container>
+
+</ng-template>
+
+
+
+
+<!-- Draw connection lines -->
+<!-- <svg class="tree-svg">
+<line *ngFor="let child of member.children" [attr.x1]="member.x + 50" [attr.y1]="member.y + 50"
+       [attr.x2]="child.x + 50" [attr.y2]="child.y" stroke="black" stroke-width="2" />
+</svg> -->
+
+<!-- Recursively render children -->
+<!-- <ng-container *ngFor="let child of member.children">
+<ng-container *ngTemplateOutlet="renderMember; context: { $implicit: child }"></ng-container>
+</ng-container> -->
+
+
+
+<!-- <button (click)="addChild(member)">➕ Add Child</button>
+<button (click)="updateMember(member)" >Update</button> -->

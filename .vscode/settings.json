@@ -3,6 +3,8 @@
     "files.autoSave": "onWindowChange",
     "workbench.tree.indent": 15,
     "editor.formatOnSave": false,
-"editor.tabSize": 10,
-"files.refactoring.autoSave": false
+"editor.tabSize": 7,
+"files.refactoring.autoSave": false,
+"editor.tabCompletion": "on",
+"editor.useTabStops": false
 }

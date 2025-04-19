@@ -32,9 +32,9 @@ http = inject(HttpClient)
 
   gelAllPositions(){
 
-      this.http.get<ApiResponseModel>(environment.API_URL +  "GetRoles").subscribe((res:ApiResponseModel)=>{
-
-      this.positionList = res.data })
+      this.http
+      .get<ApiResponseModel>(environment.API_URL +  "GetRoles")
+      .subscribe((res:ApiResponseModel)=>{this.positionList = res.data })
   }
 
 }

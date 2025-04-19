@@ -4,6 +4,7 @@ import { EmployeeComponent } from './components/employee/employee.component';
 import { ClientComponent } from './components/client/client.component';
 import { BookComponent } from './BookSection/book/book.component';
 import { FamilyTreeComponent } from './components/family-tree/family-tree.component';
+import { RememberComponent } from './components/remember/remember.component';
 
 export const routes: Routes = [
 
@@ -18,7 +19,10 @@ export const routes: Routes = [
 
     {path:'book',component: BookComponent},
 
-    {path:'family',component: FamilyTreeComponent}
+    {path:'family',component: FamilyTreeComponent},
+
+    {path:'remember',component: RememberComponent}
+
 
 
 
